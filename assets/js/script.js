@@ -29,7 +29,9 @@ function teclaDw(){
 
     //TECLA ESPAÇO - PARA ATIRAR
 	if(tecla==32){
-		
+
+		//ATIRAR
+		atira(pjx+17,pjy);
 	}
 }
 
@@ -47,6 +49,18 @@ function teclaUp(){
 	if((tecla==39)||(tecla==37)){
 		dirxJ=0;
 	}
+}
+
+//FUNÇÃO PARA ATIRAR
+function atira(x,y){
+	var t=document.createElement("div");
+	var att1=document.createAttribute("class");
+	var att2=document.createAttribute("style");
+	att1.value="tiroJog";
+	att2.value="top:"+y+"px;left:"+x+"px";
+	t.setAttributeNode(att1);
+	t.setAttributeNode(att2);
+	document.body.appendChild(t);
 }
 
 //FUNÇÃO DE CONTROLE DO JOGADOR
