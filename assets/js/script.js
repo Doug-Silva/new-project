@@ -1,5 +1,6 @@
 //VARIÁVEIS GLOBAIS
 var jog,dirxJ,diryJ,velJ,pjx,pjy;
+var velT;
 var tamanhoTelaW,tamanhoTelaH;
 var jogo;
 var frames;
@@ -63,6 +64,23 @@ function atira(x,y){
 	document.body.appendChild(t);
 }
 
+//FUNÇÃO PARA CONTROLAR OS TIROS
+function controleTiros(){
+	var tiros=document.getElementsByClassName("tiroJog");
+	var tam=tiros.length;
+	for(var i=0;i<tam;i++){
+		if(tiros[i]){
+			var pt=tiros[i].offsetTop;
+			pt-=velT;
+			tiros[i].style.top=pt+"px";
+			if(pt<0){
+				tiros[i].remove();
+			}
+		}
+	}
+	
+}
+
 //FUNÇÃO DE CONTROLE DO JOGADOR
 function controlaJogador(){
     pjy+=diryJ*velJ;
@@ -77,6 +95,7 @@ function gameLoop(){
     if(jogo){
         //FUNÇÕES DE CONTROLE
         controlaJogador();
+		controleTiros();
     }
 
     //CONTROLE DE FRAMES DO GAME
@@ -98,7 +117,7 @@ function inicia(){
     dirxJ=diryJ=0;
 	pjx=tamanhoTelaW/2;
 	pjy=tamanhoTelaH/2;
-	velJ=5;
+	velJ=velT=5;
 	jog=document.getElementById("naveJog");
 	jog.style.top=pjy+"px";
 	jog.style.left=pjx+"px";
