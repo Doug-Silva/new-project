@@ -41,3 +41,10 @@ body{
     border-radius: 6px;
     position: absolute; 
 }
+
+.bomba{
+    width: 24px;
+    height: 40px;
+    background-image: url(./img/bomba.gif);
+    position: absolute;
+}
