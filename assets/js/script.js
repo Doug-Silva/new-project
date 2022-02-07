@@ -110,12 +110,40 @@ function controleTiros(){
 			var pt=tiros[i].offsetTop;
 			pt-=velT;
 			tiros[i].style.top=pt+"px";
+			colisaoTiroBomba(tiros[i]);
 			if(pt<0){
 				tiros[i].remove();
 			}
 		}
 	}
 	
+}
+
+//FUNÇÃO DE CONTROLE DE COLISÃO DAS BOMBAS
+function colisaoTiroBomba(tiro){
+	var tam=bombasTotal.length;
+	for(var i=0;i<tam;i++){
+		if(bombasTotal[i]){
+			if(
+				(
+					//PARTE DE CIMA DO TIRO COM A PARTE DE BAIXO DA BOMBA
+					(tiro.offsetTop<=(bombasTotal[i].offsetTop+40))&&
+					//PARTE DE BAIXO DO TIRO COM A BOMBA
+					((tiro.offsetTop+6)>=(bombasTotal[i].offsetTop))
+				)
+				&&
+				(
+					//PARTE ESQUERDA DO TIRO COM A PARTE DIREITA DA BOMBA
+					(tiro.offsetLeft<=(bombasTotal[i].offsetLeft+24))&&
+					//PARTE DIREITA DO TIRO COM A PARTE ESQUERDA DA BOMBA
+					((tiro.offsetLeft+6)>=(bombasTotal[i].offsetLeft))
+				)
+			){
+				bombasTotal[i].remove();
+				tiro.remove();
+			}
+		}
+	}
 }
 
 //FUNÇÃO DE CONTROLE DO JOGADOR
