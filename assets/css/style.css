@@ -7,7 +7,7 @@ body{
 .navJog{
     width: 40px;
     height: 40px;
-    background-image: url(./img/nave-jogador.gif);
+    background-image: url(./media/nave-jogador.gif);
     position: absolute;
 }
 
@@ -45,7 +45,7 @@ body{
 .bomba{
     width: 24px;
     height: 40px;
-    background-image: url(./img/bomba.gif);
+    background-image: url(./media/bomba.gif);
     position: absolute;
 }
 

@@ -9,6 +9,68 @@ var bombasTotal;
 var vidaPlaneta;
 var indiceExplosao,indiceSom;
 
+//LOOP PRINCIPAL DO GAME
+function gameLoop(){
+
+    if(jogo){
+        //FUNÇÕES DE CONTROLE
+        controlaJogador();
+		controleTiros();
+		controlaBomba();
+    }
+
+    //CONTROLE DE FRAMES DO GAME
+    frames=requestAnimationFrame(gameLoop);
+
+}
+
+//INICIO DE TODOS OS COMPONENTES DO GAME
+function inicia(){
+
+    //INICIO DO GAME
+    jogo=true;
+
+    //INICIAR TELA DE JOGO
+    tamanhoTelaW=window.innerWidth;
+	tamanhoTelaH=window.innerHeight;
+
+    //INICIAR JOGADOR
+    dirxJ=diryJ=0;
+	pjx=tamanhoTelaW/2;
+	pjy=tamanhoTelaH/2;
+	velJ=velT=5;
+	jog=document.getElementById("naveJog");
+	jog.style.top=pjy+"px";
+	jog.style.left=pjx+"px";
+
+	//CONTROLES DAS BOMBAS
+	clearInterval(tmpCriaBomba);
+	contBombas=150;
+	velB=3;
+	tmpCriaBomba=setInterval(criaBomba,1700);
+
+	//CONTROLES DO PLANETA
+	vidaPlaneta=300;
+
+	//CONTROLES DE EXPLOSÃO
+	indiceExplosao=indiceSom=0;
+
+    gameLoop();
+}
+
+//EVENTOS
+window.addEventListener("load",inicia);
+document.addEventListener("keydown",teclaDw);
+document.addEventListener("keyup",teclaUp);
+
+//FUNÇÃO DE CONTROLE DO JOGADOR
+function controlaJogador(){
+    pjy+=diryJ*velJ;
+	pjx+=dirxJ*velJ;
+	jog.style.top=pjy+"px";
+	jog.style.left=pjx+"px";
+}
+
 //FUNÇÃO QUANDO A TECLA ESTÁ PRESSIONADA 
 function teclaDw(){
 
@@ -84,6 +146,8 @@ function controlaBomba(){
 			bombasTotal[i].style.top=pi+"px";
 			if(pi>tamanhoTelaH){
 				vidaPlaneta-=10;
+				//CHAMA FUNÇÃO CRIA EXPLOSÃO DO TIPO 2=TERRA
+				criaExplosao(2,bombasTotal[i].offsetLeft,null);
 				bombasTotal[i].remove();
 			}
 		}
@@ -110,6 +174,8 @@ function colisaoTiroBomba(tiro){
 					((tiro.offsetLeft+6)>=(bombasTotal[i].offsetLeft))
 				)
 			){
+				//CHAMA FUNÇÃO CRIA EXPLOSÃO DO TIPO 1=AR
+				criaExplosao(1,bombasTotal[i].offsetLeft-25,bombasTotal[i].offsetTop);
 				bombasTotal[i].remove();
 				tiro.remove();
 			}
@@ -121,7 +187,7 @@ function colisaoTiroBomba(tiro){
 function criaExplosao(tipo,x,y){
 	var explosao=document.createElement("div");
 	var img=document.createElement("img");
-	var som=document.createElement("som");
+	var som=document.createElement("audio");
 
 	//ATRIBUTOS PARA DIV
 	var att1=document.createAttribute("class");
@@ -141,17 +207,26 @@ function criaExplosao(tipo,x,y){
 	if(tipo==1){
 		att1.value="explosaoAr";
 		att2.value="top:"+y+"px;left:"+x+"px;";
-		att4.value="explosao-ar.gif";
+		att4.value="./assets/css/media/explosao-ar.gif";
 	}else{
 		att1.value="explosaoTerra";
 		att2.value="top:"+(tamanhoTelaH-57)+"px;left:"+(x-17)+"px;";
-		att4.value="explosao-terra.gif";
+		att4.value="./assets/css/media/explosao-terra.gif";
 	}
-	att5.value="explosao-audio.mp3";
+	att5.value="./assets/css/media/explosao-audio.mp3";
 	att6.value="som"+indiceSom;
+	explosao.setAttributeNode(att1);
+	explosao.setAttributeNode(att2);
+	explosao.setAttributeNode(att3);
+	img.setAttributeNode(att4);
+	som.setAttributeNode(att5);
+	som.setAttributeNode(att6);
+	explosao.appendChild(img);
+	explosao.appendChild(som);
+	document.body.appendChild(explosao);
+	document.getElementById("som"+indiceSom).play();
 	indiceExplosao++;
 	indiceSom++;
-
 }
 
 //FUNÇÃO PARA ATIRAR
@@ -183,65 +258,3 @@ function controleTiros(){
 	}
 	
 }
-
-//FUNÇÃO DE CONTROLE DO JOGADOR
-function controlaJogador(){
-    pjy+=diryJ*velJ;
-	pjx+=dirxJ*velJ;
-	jog.style.top=pjy+"px";
-	jog.style.left=pjx+"px";
-}
-
-//LOOP PRINCIPAL DO GAME
-function gameLoop(){
-
-    if(jogo){
-        //FUNÇÕES DE CONTROLE
-        controlaJogador();
-		controleTiros();
-		controlaBomba();
-    }
-
-    //CONTROLE DE FRAMES DO GAME
-    frames=requestAnimationFrame(gameLoop);
-
-}
-
-//INICIO DE TODOS OS COMPONENTES DO GAME
-function inicia(){
-
-    //INICIO DO GAME
-    jogo=true;
-
-    //INICIAR TELA DE JOGO
-    tamanhoTelaW=window.innerWidth;
-	tamanhoTelaH=window.innerHeight;
-
-    //INICIAR JOGADOR
-    dirxJ=diryJ=0;
-	pjx=tamanhoTelaW/2;
-	pjy=tamanhoTelaH/2;
-	velJ=velT=5;
-	jog=document.getElementById("naveJog");
-	jog.style.top=pjy+"px";
-	jog.style.left=pjx+"px";
-
-	//CONTROLES DAS BOMBAS
-	clearInterval(tmpCriaBomba);
-	contBombas=150;
-	velB=3;
-	tmpCriaBomba=setInterval(criaBomba,1700);
-
-	//CONTROLES DO PLANETA
-	vidaPlaneta=300;
-
-	//CONTROLES DE EXPLOSÃO
-	indiceExplosao=indiceSom=0;
-
-    gameLoop();
-}
-
-//EVENTOS
-window.addEventListener("load",inicia);
-document.addEventListener("keydown",teclaDw);
-document.addEventListener("keyup",teclaUp);
