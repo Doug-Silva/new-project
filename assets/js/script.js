@@ -7,6 +7,7 @@ var frames;
 var contBombas,painelContBombas,velB,tmpCriaBomba;
 var bombasTotal;
 var vidaPlaneta;
+var indiceExplosao,indiceSom;
 
 //FUNÇÃO QUANDO A TECLA ESTÁ PRESSIONADA 
 function teclaDw(){
@@ -89,6 +90,70 @@ function controlaBomba(){
 	}
 }
 
+//FUNÇÃO DE CONTROLE DE COLISÃO DAS BOMBAS
+function colisaoTiroBomba(tiro){
+	var tam=bombasTotal.length;
+	for(var i=0;i<tam;i++){
+		if(bombasTotal[i]){
+			if(
+				(
+					//PARTE DE CIMA DO TIRO COM A PARTE DE BAIXO DA BOMBA
+					(tiro.offsetTop<=(bombasTotal[i].offsetTop+40))&&
+					//PARTE DE BAIXO DO TIRO COM A BOMBA
+					((tiro.offsetTop+6)>=(bombasTotal[i].offsetTop))
+				)
+				&&
+				(
+					//PARTE ESQUERDA DO TIRO COM A PARTE DIREITA DA BOMBA
+					(tiro.offsetLeft<=(bombasTotal[i].offsetLeft+24))&&
+					//PARTE DIREITA DO TIRO COM A PARTE ESQUERDA DA BOMBA
+					((tiro.offsetLeft+6)>=(bombasTotal[i].offsetLeft))
+				)
+			){
+				bombasTotal[i].remove();
+				tiro.remove();
+			}
+		}
+	}
+}
+
+//FUNÇÃO PARA CRIAR EXPLOSÃO DAS BOMBAS
+function criaExplosao(tipo,x,y){
+	var explosao=document.createElement("div");
+	var img=document.createElement("img");
+	var som=document.createElement("som");
+
+	//ATRIBUTOS PARA DIV
+	var att1=document.createAttribute("class");
+	var att2=document.createAttribute("style");
+	var att3=document.createAttribute("id");
+
+	//ATRIBUTOS PARA IMAGEM
+	var att4=document.createAttribute("src");
+
+	//ATRIBUTOS PARA ÁUDIO
+	var att5=document.createAttribute("src");
+	var att6=document.createAttribute("id");
+
+	att3.value="explosao"+indiceExplosao;
+	//VERIFICA O TIPO DA EXPLOSÃO
+	//SE O TIPO DE EXPLOSAO FOR 1=AR, 2=TERRA
+	if(tipo==1){
+		att1.value="explosaoAr";
+		att2.value="top:"+y+"px;left:"+x+"px;";
+		att4.value="explosao-ar.gif";
+	}else{
+		att1.value="explosaoTerra";
+		att2.value="top:"+(tamanhoTelaH-57)+"px;left:"+(x-17)+"px;";
+		att4.value="explosao-terra.gif";
+	}
+	att5.value="explosao-audio.mp3";
+	att6.value="som"+indiceSom;
+	indiceExplosao++;
+	indiceSom++;
+
+}
+
 //FUNÇÃO PARA ATIRAR
 function atira(x,y){
 	var t=document.createElement("div");
@@ -117,33 +182,6 @@ function controleTiros(){
 		}
 	}
 	
-}
-
-//FUNÇÃO DE CONTROLE DE COLISÃO DAS BOMBAS
-function colisaoTiroBomba(tiro){
-	var tam=bombasTotal.length;
-	for(var i=0;i<tam;i++){
-		if(bombasTotal[i]){
-			if(
-				(
-					//PARTE DE CIMA DO TIRO COM A PARTE DE BAIXO DA BOMBA
-					(tiro.offsetTop<=(bombasTotal[i].offsetTop+40))&&
-					//PARTE DE BAIXO DO TIRO COM A BOMBA
-					((tiro.offsetTop+6)>=(bombasTotal[i].offsetTop))
-				)
-				&&
-				(
-					//PARTE ESQUERDA DO TIRO COM A PARTE DIREITA DA BOMBA
-					(tiro.offsetLeft<=(bombasTotal[i].offsetLeft+24))&&
-					//PARTE DIREITA DO TIRO COM A PARTE ESQUERDA DA BOMBA
-					((tiro.offsetLeft+6)>=(bombasTotal[i].offsetLeft))
-				)
-			){
-				bombasTotal[i].remove();
-				tiro.remove();
-			}
-		}
-	}
 }
 
 //FUNÇÃO DE CONTROLE DO JOGADOR
@@ -196,6 +234,9 @@ function inicia(){
 
 	//CONTROLES DO PLANETA
 	vidaPlaneta=300;
+
+	//CONTROLES DE EXPLOSÃO
+	indiceExplosao=indiceSom=0;
 
     gameLoop();
 }

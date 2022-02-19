@@ -48,3 +48,16 @@ body{
     background-image: url(./img/bomba.gif);
     position: absolute;
 }
+
+.explosaoAr{
+    width: 70px;
+    height: 70px;
+    position: absolute;
+}
+
+.explosaoTerra{
+    width: 55px;
+    height: 57px;
+    position: absolute;
+}
+
