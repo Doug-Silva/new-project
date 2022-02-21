@@ -185,6 +185,12 @@ function colisaoTiroBomba(tiro){
 
 //FUNÇÃO PARA CRIAR EXPLOSÃO DAS BOMBAS
 function criaExplosao(tipo,x,y){
+
+	//ROTINA DE CONTROLE PARA REMOVER EXPLOSÃO
+	if(document.getElementById("explosao"+(indiceExplosao-3))){
+		document.getElementById("explosao"+(indiceExplosao-3)).remove();
+	}
+
 	var explosao=document.createElement("div");
 	var img=document.createElement("img");
 	var som=document.createElement("audio");
@@ -207,13 +213,13 @@ function criaExplosao(tipo,x,y){
 	if(tipo==1){
 		att1.value="explosaoAr";
 		att2.value="top:"+y+"px;left:"+x+"px;";
-		att4.value="./assets/css/media/explosao-ar.gif";
+		att4.value="./assets/css/media/explosao-ar.gif?"+new Date();
 	}else{
 		att1.value="explosaoTerra";
 		att2.value="top:"+(tamanhoTelaH-57)+"px;left:"+(x-17)+"px;";
-		att4.value="./assets/css/media/explosao-terra.gif";
+		att4.value="./assets/css/media/explosao-terra.gif?"+new Date();
 	}
-	att5.value="./assets/css/media/explosao-audio.mp3";
+	att5.value="./assets/css/media/explosao-audio.mp3?"+new Date();
 	att6.value="som"+indiceSom;
 	explosao.setAttributeNode(att1);
 	explosao.setAttributeNode(att2);
