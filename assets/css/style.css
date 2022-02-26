@@ -1,31 +1,13 @@
 body {
     overflow-x: hidden;
     overflow-y: hidden;
-    background-color: #fff;
+    background-image: url(./media/fundo.jpg);
 }
 
-.navJog {
-    width: 60px;
-    height: 136px;
-    background-image: url(./media/nave-jogador.gif);
-    position: absolute;
-}
-
-.telaMsg{
-	position:absolute;
-	margin-left:-25%;
-	top:130px;
-	left:55%;
-	width:720px;
-	height:538px;
-	display: none;
-    border-radius: 15px;
-}
-
-#btnJogar{
-    background-color: #008CBA;
+#btnJogar {
+    background-color: #4CAF50;
     border: none;
-    color: white;
+    color: #fff;
     padding: 15px 32px;
     text-align: center;
     text-decoration: none;
@@ -37,7 +19,7 @@ body {
 }
 
 #btnJogar:hover {
-    background-color: rgb(9, 192, 248);
+    background-color: #73dd77;
     color: white;
 }
 
@@ -45,7 +27,7 @@ body {
     border: 2px solid #000;
     width: 300px;
     height: 20px;
-    box-shadow: 3px 3px 3px;
+    box-shadow: 3px 3px 3px #000;
     border-radius: 15px;
     background-color: #fff;
 }
@@ -58,8 +40,27 @@ body {
 }
 
 #painel {
+    color: #fff;
     font-size: 18px;
     margin: 18px 12px;
+}
+
+.telaMsg {
+    position: absolute;
+    margin-left: -25%;
+    top: 130px;
+    left: 55%;
+    width: 720px;
+    height: 538px;
+    display: none;
+    border-radius: 15px;
+}
+
+.navJog {
+    width: 60px;
+    height: 136px;
+    background-image: url(./media/nave-jogador.gif);
+    position: absolute;
 }
 
 .tiroJog {
