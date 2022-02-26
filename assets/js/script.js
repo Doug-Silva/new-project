@@ -6,8 +6,9 @@ var jogo;
 var frames;
 var contBombas,painelContBombas,velB,tmpCriaBomba;
 var bombasTotal;
-var vidaPlaneta;
+var vidaPlaneta,barraPlaneta;
 var indiceExplosao,indiceSom;
+var telaMsg;
 
 //LOOP PRINCIPAL DO GAME
 function gameLoop(){
@@ -18,6 +19,7 @@ function gameLoop(){
 		controleTiros();
 		controlaBomba();
     }
+	gerenciaGame();
 
     //CONTROLE DE FRAMES DO GAME
     frames=requestAnimationFrame(gameLoop);
@@ -51,9 +53,14 @@ function inicia(){
 
 	//CONTROLES DO PLANETA
 	vidaPlaneta=300;
+	barraPlaneta=document.getElementById("barraPlaneta");
+	barraPlaneta.style.width=vidaPlaneta+"px";
 
 	//CONTROLES DE EXPLOSÃO
 	indiceExplosao=indiceSom=0;
+
+	//CONTROLE DAS TELAS
+	telaMsg=document.getElementById("telaMsg");
 
     gameLoop();
 }
@@ -62,6 +69,24 @@ function inicia(){
 window.addEventListener("load",inicia);
 document.addEventListener("keydown",teclaDw);
 document.addEventListener("keyup",teclaUp);
+
+//FUNÇÃO DE GERENCIAMENTO DO GAME
+function gerenciaGame(){
+	barraPlaneta.style.width=vidaPlaneta+"px";
+	if(contBombas<=0){
+		jogo=false;
+		clearInterval(tmpCriaBomba);
+		telaMsg.style.backgroundImage="url('./assets/css/media/vitoria.jpg')";
+		telaMsg.style.display="block";
+	}
+
+	if(vidaPlaneta<=0){
+		jogo=false;
+		clearInterval(tmpCriaBomba);
+		telaMsg.style.backgroundImage="url('./assets/css/media/derrota.jpg')";
+		telaMsg.style.display="block";
+	}
+}
 
 //FUNÇÃO DE CONTROLE DO JOGADOR
 function controlaJogador(){
@@ -98,7 +123,7 @@ function teclaDw(){
 	if(tecla==32){
 
 		//ATIRAR
-		atira(pjx+17,pjy);
+		atira(pjx+27,pjy);
 	}
 }
 
@@ -187,8 +212,8 @@ function colisaoTiroBomba(tiro){
 function criaExplosao(tipo,x,y){
 
 	//ROTINA DE CONTROLE PARA REMOVER EXPLOSÃO
-	if(document.getElementById("explosao"+(indiceExplosao-3))){
-		document.getElementById("explosao"+(indiceExplosao-3)).remove();
+	if(document.getElementById("explosao"+(indiceExplosao-4))){
+		document.getElementById("explosao"+(indiceExplosao-4)).remove();
 	}
 
 	var explosao=document.createElement("div");

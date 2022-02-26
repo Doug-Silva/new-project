@@ -1,63 +1,90 @@
-body{
+body {
     overflow-x: hidden;
     overflow-y: hidden;
     background-color: #fff;
 }
 
-.navJog{
-    width: 40px;
-    height: 40px;
+.navJog {
+    width: 60px;
+    height: 136px;
     background-image: url(./media/nave-jogador.gif);
     position: absolute;
 }
 
 .telaMsg{
-    position: absolute;
-    margin-left: -25%;
-    top: 50px;
-    left: 50%;
-    width: 720px;
-    height: 621px;
-    display: none;
+	position:absolute;
+	margin-left:-25%;
+	top:130px;
+	left:55%;
+	width:720px;
+	height:538px;
+	display: none;
+    border-radius: 15px;
 }
 
-#medidorPlaneta{
+#btnJogar{
+    background-color: #008CBA;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    border-radius: 15px;
+    cursor: pointer;
+    margin: 12px 12px;
+}
+
+#btnJogar:hover {
+    background-color: rgb(9, 192, 248);
+    color: white;
+}
+
+#medidorPlaneta {
     border: 2px solid #000;
     width: 300px;
     height: 20px;
+    box-shadow: 3px 3px 3px;
+    border-radius: 15px;
     background-color: #fff;
 }
 
-#barraPlaneta{
+#barraPlaneta {
     width: 300px;
     height: 20px;
-    background-color: #55ff;
+    border-radius: 15px;
+    background: linear-gradient(45deg, #e44343, #008cba);
 }
 
-.tiroJog{
+#painel {
+    font-size: 18px;
+    margin: 18px 12px;
+}
+
+.tiroJog {
     width: 6px;
     height: 6px;
     background-color: #000;
     border-radius: 6px;
-    position: absolute; 
+    position: absolute;
 }
 
-.bomba{
+.bomba {
     width: 24px;
     height: 40px;
     background-image: url(./media/bomba.gif);
     position: absolute;
 }
 
-.explosaoAr{
+.explosaoAr {
     width: 70px;
     height: 70px;
     position: absolute;
 }
 
-.explosaoTerra{
+.explosaoTerra {
     width: 55px;
     height: 57px;
     position: absolute;
 }
-
