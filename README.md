@@ -6,7 +6,7 @@
   </div><br>
 
   <h1>Space Battle Game</h1>
-  <p>Um jogo de nave, onde precisamos batalhar para salvar o planeta de um ataque misterioso, desenvolvido em JavaScript</p>
+  <p></p>
 
   <div>
     <a href="https://github.com/Doug-Silva/space-battle-game/blob/main/LICENSE"><img src="https://img.shields.io/npm/l/react" alt="License MIT"></a>
