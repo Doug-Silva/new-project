@@ -39,13 +39,13 @@ function inicia() {
 	dirxJ = diryJ = 0;
 	pjx = tamanhoTelaW / 2;
 	pjy = tamanhoTelaH / 2;
-	velJ = velT = 5;
+	velJ = velT = 7;
 	jog = document.getElementById("naveJog");
 	jog.style.top = pjy + "px";
 	jog.style.left = pjx + "px";
 
 	//CONTROLES DAS BOMBAS
-	contBombas = 150;
+	contBombas = 100;
 	velB = 3;
 
 	//CONTROLES DO PLANETA
