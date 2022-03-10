@@ -1,14 +1,14 @@
 //VARIÁVEIS GLOBAIS
-var jog, dirxJ, diryJ, velJ, pjx, pjy;
-var velT;
-var tamanhoTelaW, tamanhoTelaH;
-var jogo;
-var frames;
-var contBombas, painelContBombas, velB, tmpCriaBomba;
-var bombasTotal;
-var vidaPlaneta, barraPlaneta;
-var indiceExplosao, indiceSom;
-var telaMsg;
+let jog, dirxJ, diryJ, velJ, pjx, pjy;
+let velT;
+let tamanhoTelaW, tamanhoTelaH;
+let jogo;
+let frames;
+let contBombas, painelContBombas, velB, tmpCriaBomba;
+let bombasTotal;
+let vidaPlaneta, barraPlaneta;
+let indiceExplosao, indiceSom;
+let telaMsg;
 
 //LOOP PRINCIPAL DO GAME
 function gameLoop() {
@@ -66,9 +66,9 @@ function inicia() {
 //REINICIA COMPONENTES DO GAME (NOVO JOGO)
 function reinicia() {
 	bombasTotal = document.getElementsByClassName("bomba");
-	var tam = bombasTotal.length;
+	let tam = bombasTotal.length;
 
-	for (var i = 0; i < tam; i++) {
+	for (let i = 0; i < tam; i++) {
 		if (bombasTotal[i]) {
 			bombasTotal[i].remove();
 		}
@@ -125,7 +125,7 @@ function controlaJogador() {
 //FUNÇÃO QUANDO A TECLA ESTÁ PRESSIONADA 
 function teclaDw() {
 
-	var tecla = event.keyCode;
+	let tecla = event.keyCode;
 
 	//TECLA PARA CIMA
 	if (tecla == 38) {
@@ -156,7 +156,7 @@ function teclaDw() {
 //FUNÇÃO QUANDO A TECLA NÃO ESTÁ PRESSIONADA
 function teclaUp() {
 
-	var tecla = event.keyCode;
+	let tecla = event.keyCode;
 
 	//TECLA CIMA, BAIXO
 	if ((tecla == 38) || (tecla == 40)) {
@@ -172,11 +172,11 @@ function teclaUp() {
 //FUNÇÃO PARA CRIAR BOMBA
 function criaBomba() {
 	if (jogo) {
-		var y = 0;
-		var x = Math.random() * tamanhoTelaW;
-		var bomba = document.createElement("div");
-		var att1 = document.createAttribute("class");
-		var att2 = document.createAttribute("style");
+		let y = 0;
+		let x = Math.random() * tamanhoTelaW;
+		let bomba = document.createElement("div");
+		let att1 = document.createAttribute("class");
+		let att2 = document.createAttribute("style");
 		att1.value = "bomba";
 		att2.value = "top:" + y + "px;left:" + x + "px;";
 		bomba.setAttributeNode(att1);
@@ -189,10 +189,10 @@ function criaBomba() {
 //FUNÇÃO PARA CONTROLAR AS BOMBAS
 function controlaBomba() {
 	bombasTotal = document.getElementsByClassName("bomba");
-	var tam = bombasTotal.length;
-	for (var i = 0; i < tam; i++) {
+	let tam = bombasTotal.length;
+	for (let i = 0; i < tam; i++) {
 		if (bombasTotal[i]) {
-			var pi = bombasTotal[i].offsetTop;
+			let pi = bombasTotal[i].offsetTop;
 			pi += velB;
 			bombasTotal[i].style.top = pi + "px";
 			if (pi > tamanhoTelaH) {
@@ -207,8 +207,8 @@ function controlaBomba() {
 
 //FUNÇÃO DE CONTROLE DE COLISÃO DAS BOMBAS
 function colisaoTiroBomba(tiro) {
-	var tam = bombasTotal.length;
-	for (var i = 0; i < tam; i++) {
+	let tam = bombasTotal.length;
+	for (let i = 0; i < tam; i++) {
 		if (bombasTotal[i]) {
 			if (
 				(
@@ -242,21 +242,21 @@ function criaExplosao(tipo, x, y) {
 		document.getElementById("explosao" + (indiceExplosao - 4)).remove();
 	}
 
-	var explosao = document.createElement("div");
-	var img = document.createElement("img");
-	var som = document.createElement("audio");
+	let explosao = document.createElement("div");
+	let img = document.createElement("img");
+	let som = document.createElement("audio");
 
 	//ATRIBUTOS PARA DIV
-	var att1 = document.createAttribute("class");
-	var att2 = document.createAttribute("style");
-	var att3 = document.createAttribute("id");
+	let att1 = document.createAttribute("class");
+	let att2 = document.createAttribute("style");
+	let att3 = document.createAttribute("id");
 
 	//ATRIBUTOS PARA IMAGEM
-	var att4 = document.createAttribute("src");
+	let att4 = document.createAttribute("src");
 
 	//ATRIBUTOS PARA ÁUDIO
-	var att5 = document.createAttribute("src");
-	var att6 = document.createAttribute("id");
+	let att5 = document.createAttribute("src");
+	let att6 = document.createAttribute("id");
 
 	att3.value = "explosao" + indiceExplosao;
 	//VERIFICA O TIPO DA EXPLOSÃO
@@ -288,12 +288,12 @@ function criaExplosao(tipo, x, y) {
 
 //FUNÇÃO PARA ATIRAR
 function atira(x, y) {
-	var t = document.createElement("div");
-	var som = document.createElement("audio");
-	var att1 = document.createAttribute("class");
-	var att2 = document.createAttribute("style");
-	var att3 = document.createAttribute("src");
-	var att4 = document.createAttribute("id");
+	let t = document.createElement("div");
+	let som = document.createElement("audio");
+	let att1 = document.createAttribute("class");
+	let att2 = document.createAttribute("style");
+	let att3 = document.createAttribute("src");
+	let att4 = document.createAttribute("id");
 	att1.value = "tiroJog";
 	att2.value = "top:" + y + "px;left:" + x + "px;";
 	att3.value = "./assets/css/media/tiro.wav?" + new Date();
@@ -310,11 +310,11 @@ function atira(x, y) {
 
 //FUNÇÃO PARA CONTROLAR OS TIROS
 function controleTiros() {
-	var tiros = document.getElementsByClassName("tiroJog");
-	var tam = tiros.length;
-	for (var i = 0; i < tam; i++) {
+	let tiros = document.getElementsByClassName("tiroJog");
+	let tam = tiros.length;
+	for (let i = 0; i < tam; i++) {
 		if (tiros[i]) {
-			var pt = tiros[i].offsetTop;
+			let pt = tiros[i].offsetTop;
 			pt -= velT;
 			tiros[i].style.top = pt + "px";
 			colisaoTiroBomba(tiros[i]);
