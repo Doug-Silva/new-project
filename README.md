@@ -9,7 +9,7 @@
   <p>Um jogo de nave, onde precisamos batalhar para salvar o planeta de um ataque misterioso, desenvolvido em JavaScript</p>
 
   <div>
-    <a href="https://github.com/Doug-Silva/space-battle-game/blob/main/LICENSE"><img src="https://img.shields.io/npm/l/react" alt="License MIT"></a>
+    <a href="https://github.com/Doug-Silva/space-battle-game/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-MIT-green" alt="License MIT"></a>
   </div><br>
 
   <!--Adicionar imagem/gif do projeto aqui-->
